@@ -14,11 +14,11 @@ function Countries() {
   useEffect(() => {
     dispatch(getAllCountries());
   }, [dispatch]);
-
+  console.log(countries)
   return (
     <div>
       <Container>
-        <h1>Countries</h1>
+        <h1>Countries </h1>
         <Pagination
           //page={page+ 1}
           //totalPages={total}
@@ -30,13 +30,15 @@ function Countries() {
         {Array.isArray(countries) ? (
           countries.map((country) => (
             <Card>
+              
               <Wrap key={country.name}>
-                <Link to={`/countriesname/${country.name}`}>
+                <Link to={`/countries/${country.id}`}>
                   <img src={country.flag} alt={country.name} />
+                
                 </Link>
               </Wrap>
               <Bottom>
-                <h4>Name: {country.name}</h4>
+                <h4>Name: {country.name} {console.log(country)}</h4>
                 <h4>Region: {country.region}</h4>
               </Bottom>
             </Card>

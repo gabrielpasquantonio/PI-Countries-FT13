@@ -32,7 +32,7 @@ function App() {
           <Route path="/home">
             <Home/>
           </Route>
-          <Route path="/countriesname/:id">
+          <Route path="/countries/:id">
             <Country/>
           </Route>
           <Route path="/create">

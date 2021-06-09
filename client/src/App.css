@@ -1,0 +1,31 @@
+.star{
+    cursor:pointer;
+    transition: color 200ms;
+}
+
+
+
+
+.summer{
+    background-image: url('./assets/summer.png');
+    background-repeat: no-repeat;
+    background-size: cover;  
+}
+
+.autumn{
+    background-image: url('./assets/autumn.png');
+    background-repeat: no-repeat;
+    background-size: cover;  
+}
+
+.winter{
+    background-image: url('./assets/winter.png');
+    background-repeat: no-repeat;
+    background-size: cover;  
+}
+
+.spring{
+    background-image: url('./assets/spring.png');
+    background-repeat: no-repeat;
+    background-size: cover;  
+}

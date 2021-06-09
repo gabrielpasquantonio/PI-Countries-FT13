@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import imageOne from "../assets/logo1.png"
-import imageTwo from "../assets/logo2.png"
+
 
 const Login = () => {
   return (
@@ -112,14 +112,6 @@ const Description = styled.h2`
   margin: 0 0 24px;
   line-height: 1.6;
   letter-spacing: 1.8px;
-`;
-
-const CTALogoTwo = styled.img`
-  max-width: 600px;
-  margin-bottom: 20px;
-  display: inline-block;
-  vertical-align: bottom;
-  width: 100%;
 `;
 
 export default Login;

@@ -10,8 +10,9 @@ export function getAllCountries() {
   
 }
 export function getCountry(id) {
+  
   return (dispatch) => {
-    axios.get(`http://localhost:3001/countryname/${id}`).then(response => {console.log(response.data)
+    axios.get(`http://localhost:3001/countries/${id}`).then(response => {console.log(response.data)
       dispatch({ type: SET_COUNTRIENAME, payload: response.data })
     }).catch(error => {
       if(error.response?.status !== 404) alert("Something is wrong 😅")
