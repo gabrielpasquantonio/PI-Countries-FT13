@@ -3,7 +3,10 @@ import styled from 'styled-components'
 import { LeftArrow, RightArrow } from "./Arrows";
 
 function Pagination(props) {
-    const {onLeftClick, onRightClick, page, totalPages}= props;
+    const {onLeftClick, onRightClick, page,setPage, totalPages}= props;
+
+
+    
     return (
         <Paginationn>
             <Button onClick={onLeftClick}><LeftArrow /></Button>

@@ -1,56 +1,77 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCountries } from "../actions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Pagination from "../components/Pagination";
 
-
-
 function Countries() {
+  const [page, setPage] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const countries = useSelector((state) => state.countries);
-
+  let limit = 10; // with this limit we change the limit of countries shown per page
   useEffect(() => {
-    dispatch(getAllCountries());
-  }, [dispatch]);
-  console.log(countries)
+    dispatch(getAllCountries(limit, limit * page));
+    setTotal(Math.ceil(250 / limit));
+   
+  }, [page]);
+
+  const previousPage = () => {
+    const nextPage = Math.max(page - 1, 0);
+    setPage(nextPage);
+  };
+
+  const nextPage = () => {
+    
+    const nextPage = Math.min(page + 1, total - 1);
+    setPage(nextPage);
+    
+
+  };
+
   return (
     <div>
-      <Container>
-        <h1>Countries </h1>
-        <Pagination
-          //page={page+ 1}
-          //totalPages={total}
-          //onLeftClick={previousPage}
-          //onRightClick={nextPage}
-        />
-      </Container>
-      <Content>
-        {Array.isArray(countries) ? (
-          countries.map((country) => (
-            <Card>
-              
-              <Wrap key={country.name}>
-                <Link to={`/countries/${country.id}`}>
-                  <img src={country.flag} alt={country.name} />
-                
-                </Link>
-              </Wrap>
-              <Bottom>
-                <h4>Name: {country.name} {console.log(country)}</h4>
-                <h4>Region: {country.region}</h4>
-              </Bottom>
-            </Card>
-          ))
-        ) : (
-          <h1>Loading...</h1>
-        )}
-      </Content>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          <Container>
+            <h1>Countries </h1>
+            <Pagination
+              page={page + 1}
+              totalPages={total}
+              onLeftClick={previousPage}
+              onRightClick={nextPage}
+            />
+          </Container>
+          <Content>
+            {Array.isArray(countries) ? (
+              countries.map((country) => (
+                <Card>
+                  <Wrap key={country.name}>
+                    <Link to={`/countries/${country.id}`}>
+                      <img src={country.flag} alt={country.name} />
+                    </Link>
+                  </Wrap>
+                  <Bottom>
+                    <h4>
+                      Name: {country.name} {console.log(country)}
+                    </h4>
+                    <h4>Region: {country.region}</h4>
+                  </Bottom>
+                </Card>
+              ))
+            ) : (
+              <h1>Loading...</h1>
+            )}
+          </Content>
+        </>
+      )}
     </div>
   );
 }
-
 
 const Container = styled.div`
   margin-top: 22px;

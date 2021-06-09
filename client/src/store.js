@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { SET_COUNTRIES,SET_COUNTRIENAME } from "./actionsNames";
+import { SET_COUNTRIES,SET_COUNTRIENAME,SEARCH_COUNTRIES } from "./actionsNames";
 
 
 
@@ -17,6 +17,9 @@ function reducer(state = initialState, action) {
     }
     case SET_COUNTRIENAME: {
         return { ...state, countryName: action.payload };
+      }
+      case SEARCH_COUNTRIES: {
+        return { ...state, countries: action.payload };
       }
     default: {
       return state;
