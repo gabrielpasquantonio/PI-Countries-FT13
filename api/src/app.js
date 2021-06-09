@@ -30,35 +30,6 @@ server.use((req, res, next) => {
 });
 
 
-//get all the data from api using code
-server.get('/countrycode/:id',  (req,res) => {
-  axios.get(`https://restcountries.eu/rest/v2/alpha/${req.params.id}`)
-  .then(response => res.json(response.data))//trae la api y la base de datos
-  .catch(error => res.status(500).json({error:"sorry bro"}))
-
-
-})
-//get all the data from api using name
-server.get('/countryname/:id', async (req,res) => {
-  
-  try {
-    const response = await   axios.get(`https://restcountries.eu/rest/v2/name/${req.params.id}`)
-   res.json(response.data)//trae la api y la base de datos
-  } catch (error) {
-    if(error.response?.status === 404){
-      const country = countries.find(country => country.name === req.params.id)
-      if(country) return res.json(country)
-      return res.sendStatus(404)
-    }
-    res.status(500).json({error:"sorry bro"})
-  }
-  
-
-
-})
-
-//pretending is the database
-
 
 
 

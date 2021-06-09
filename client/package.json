@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.0",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.1",
     "@testing-library/user-event": "^12.2.2",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
+    "firebase": "^8.6.5",
     "formi": "^0.4.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

@@ -22,25 +22,19 @@ function setCountry(props) {
 //get all the data from api
 
 const getAllData = async (req, res) => {
- 
-    
- const result = await db.Country.findAll();
+  const result = await db.Country.findAll();
   let result10 = await db.Country.findAll({ limit: 10 });
-  
-  
-  if (req.query.name) {
-   
-    let a =  req.query.name[1].toUpperCase();
-    let b =  req.query.name.substr(2).toLowerCase();
-    let c = a + b;
-    let countryName =  c.substring(0, c.length - 1);
-    
-    const result1 = await db.Country.findOne({
-        where: { name: countryName },
-      });
-   
 
-      
+  if (req.query.name) {
+    let a = req.query.name[1].toUpperCase();
+    let b = req.query.name.substr(2).toLowerCase();
+    let c = a + b;
+    let countryName = c.substring(0, c.length - 1);
+
+    const result1 = await db.Country.findOne({
+      where: { name: countryName },
+    });
+
     if (!result1) {
       res.status(404).send("Country Not found into our database");
     }
@@ -70,6 +64,7 @@ countries.get("/:id", async (req, res) => {
     if (req.params.id) {
       const result = await db.Country.findOne({
         where: { id: req.params.id.toUpperCase() },
+        include: [db.Activity],
       });
 
       if (!result) {
@@ -82,7 +77,5 @@ countries.get("/:id", async (req, res) => {
     res.status(500).send("Server crashed");
   }
 });
-
-
 
 module.exports = countries;

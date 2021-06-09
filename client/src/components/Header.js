@@ -3,9 +3,13 @@ import userPhoto from "../assets/avatar.png";
 import { NavLink } from "react-router-dom";
 import Henry from "../assets/logo.png";
 import Home from "../assets/home-icon.svg";
+
 import React from "react";
 
+
 function Header() {
+ 
+
   return (
     <Nav>
       <NavLink exact to="/">
@@ -13,6 +17,8 @@ function Header() {
           <img src={Henry} alt="Henry" />
         </Logo>
       </NavLink>
+
+   
       <NavMenu>
         <NavLink exact to="/home" >
           <img src={Home} alt="HOME" />
@@ -41,6 +47,7 @@ function Header() {
           </a>
         </DropDown>
       </SignOut>
+     
     </Nav>
   );
 }
