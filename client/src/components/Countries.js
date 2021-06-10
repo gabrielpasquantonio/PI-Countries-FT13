@@ -1,22 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
-import { getAllCountries } from "../actions";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Pagination from "../components/Pagination";
+import React, { useState, useEffect } from "react";
 
-function Countries() {
-  const [page, setPage] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
-  const countries = useSelector((state) => state.countries);
-  let limit = 10; // with this limit we change the limit of countries shown per page
-  useEffect(() => {
-    dispatch(getAllCountries(limit, limit * page));
-    setTotal(Math.ceil(250 / limit));
-   
-  }, [page]);
+function Countries(props) {
+const {  loading, page, setPage, total,countries,data } = props;
+
+console.log(data)
+console.log(countries)
 
   const previousPage = () => {
     const nextPage = Math.max(page - 1, 0);
@@ -24,17 +15,38 @@ function Countries() {
   };
 
   const nextPage = () => {
-    
     const nextPage = Math.min(page + 1, total - 1);
     setPage(nextPage);
-    
-
   };
 
   return (
     <div>
-      {loading ? (
-        <div>Loading...</div>
+      {data? (
+        <>
+        <Container>
+          <h1>Countries </h1>
+          
+        </Container>
+        <Content>
+          {data ? (
+            
+              <Card>
+                <Wrap key={data.name}>
+                  <Link to={`/countries/${data.id}`}>
+                    <img src={data.flag} alt={data.name} />
+                  </Link>
+                </Wrap>
+                <Bottom>
+                  <h4>Name: {data.name}</h4>
+                  <h4>Region: {data.region}</h4>
+                </Bottom>
+              </Card>
+            
+          ) : (
+            <h1>Loading...</h1>
+          )}
+        </Content>
+      </>
       ) : (
         <>
           <Container>
@@ -56,9 +68,7 @@ function Countries() {
                     </Link>
                   </Wrap>
                   <Bottom>
-                    <h4>
-                      Name: {country.name} {console.log(country)}
-                    </h4>
+                    <h4>Name: {country.name}</h4>
                     <h4>Region: {country.region}</h4>
                   </Bottom>
                 </Card>

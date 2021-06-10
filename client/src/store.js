@@ -7,7 +7,8 @@ import { SET_COUNTRIES,SET_COUNTRIENAME,SEARCH_COUNTRIES } from "./actionsNames"
 
 const initialState = {
   countries: undefined,
-  countryName:undefined
+  countryName:undefined,
+  countrySearch:undefined,
 };
 
 function reducer(state = initialState, action) {
@@ -19,7 +20,8 @@ function reducer(state = initialState, action) {
         return { ...state, countryName: action.payload };
       }
       case SEARCH_COUNTRIES: {
-        return { ...state, countries: action.payload };
+        const validate = Array.isArray(action.payload);
+        return { ...state, countries:validate ? action.payload : state.countries };
       }
     default: {
       return state;
