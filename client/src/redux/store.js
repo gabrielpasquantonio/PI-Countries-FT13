@@ -6,6 +6,7 @@ import {
   SEARCH_COUNTRIES,
   CREATE_ACTIVITY,
   FILTER_COUNTRY,
+   ORDER_COUNTRY
 } from "./actionsNames";
 
 const initialState = {
@@ -37,7 +38,11 @@ function reducer(state = initialState, action) {
     }
     case FILTER_COUNTRY:
       return { ...state, countries: [...action.payload] };
-    default: {
+      case ORDER_COUNTRY:
+        return { ...state, countries: action.payload };
+      
+      default: {
+
       return state;
     }
   }

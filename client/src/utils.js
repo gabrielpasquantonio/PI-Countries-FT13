@@ -25,7 +25,68 @@ const searchCountry = async (country) => {
       filteredData = data.filter((item) =>
         item.region.includes(option.region)
       );
-      // filtro la data por el nombre, mayus y si incluye tmb a Mayus.
+      
     }
     return filteredData;
+  }
+
+  export async function order(data, option) {
+    let sortedData;console.log(option.name)
+    if (option.name) {
+     
+     
+     
+      sortedData = data.sort((a, b) => {
+        if (option.name === "Descendent") {
+          console.log("this is "+ a.name)
+          console.log("this is b  " + b.name)
+          // https://developer.mozilla.org/es/search?q=sort
+          if (a.name < b.name) {
+            return 1;
+          }
+          if (a.name > b.name) {
+            return -1;
+          }
+        } else {
+          if (a.name > b.name) {
+            return 1;
+          }
+          if (a.name < b.name) {
+            return -1;
+          }
+        }
+        
+        return 0;
+      }); 
+    }
+    if (option.population) {
+      const dataOrdenadaClear = data.filter((item) => item.area && item )
+      sortedData = dataOrdenadaClear.sort((a, b) => {
+        
+        const aresult = a.area / a.population
+        const bresult = b.area / b.population
+        
+        if (option.population === "Descendent") {
+         
+          if (aresult < bresult) {
+            return 1;
+          }
+          if (aresult > bresult) {
+            return -1;
+          }
+        } else {
+          if (aresult > bresult) {
+            return 1;
+          }
+          if (aresult < bresult) {
+            return -1;
+          }
+        }
+        // ordeno la data que me trae con un sort por primera letra del name
+        return 0;
+      }); // funcion que ordena
+    }
+    
+    return sortedData;
+   
   }

@@ -1,11 +1,12 @@
-import { filterData, ordenado } from "../utils";
+import { filterData, order } from "../utils";
 import axios from "axios";
 import {
   SET_COUNTRIES,
   SET_COUNTRIENAME,
   SEARCH_COUNTRIES,
   CREATE_ACTIVITY,
-  FILTER_COUNTRY
+  FILTER_COUNTRY,
+  ORDER_COUNTRY
 } from "./actionsNames";
 
 
@@ -73,6 +74,20 @@ export function filteredData(data, option) {
     );
   };
 }
+
+
+
+export function orderedData(data, option) {
+  return async function (dispatch) {
+    order(data, option).then((data) =>
+      dispatch({ type: ORDER_COUNTRY, payload: data })
+    );
+    // falta el reducers, componentes, filtrado y pagina detalle, formulario controlado, el temperamento tmabien
+  };
+}
+
+
+
 
 
 export function clearUser() {
