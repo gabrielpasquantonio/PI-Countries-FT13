@@ -1,115 +1,134 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./CreateForm.css";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import TextField from "./TextField.js";
 import * as Yup from "yup";
 import PrimaryButton from "./PrimaryButton";
 import styled from "styled-components";
+import SelectField from "./SelectField";
+import CheckBoxField from "./CheckBoxField";
+import {createActivity} from "../redux/actions"
+import { useDispatch,connect } from "react-redux";
+
 
 
 function CreateForm() {
-  const initialValues = {
-    name: "",
-    attribute1: "",
-    attribute2: "",
-    attribute3: "",
-    attribute4: "",
-    attribute5: "",
-  };
+  const dispatch = useDispatch();
+  const initialValues= {name: "",
+    difficulty:"",
+    duration: "",
+    season: "",
+    country: "",
+    id: ""
+}
+
+  
   const validate = Yup.object({
     name: Yup.string()
       .max(20, "Must be 20 characters or less")
       .required("Required"),
-    attribute1: Yup.string()
-      .max(20, "Must be 20 characters or less")
+    difficulty: Yup.number()
+      .min(1, "Must  have a minimun value of 1")
+      .max(5, "Must have a maximun value of 5")
       .required("Required"),
-    attribute2: Yup.string()
-      .max(20, "Must be 20 characters or less")
+    duration: Yup.number()
+      .min(1, "Must  have a minimun value of 1")
+      .max(24, "Must have a maximun value of 24")
       .required("Required"),
-    attribute3: Yup.string()
-      .min(2, "Message should have at least 2 characters.")
-      .max(30, "Message should not exceed 30 characters.")
-      .required("Required eee"),
-    attribute4: Yup.string()
-      .max(20, "Must be 20 characters or less")
+    season: Yup.string()
       .required("Required"),
-    attribute5: Yup.string()
-      .max(20, "Must be 20 characters or less")
-      .required("Required"),
+    country: Yup.lazy(val => (Array.isArray(val) ? Yup.array().of(Yup.string().required("Please select at least one Country"),) : Yup.string().required("Please select at least one Country")))
+   
+    
   });
 
+
+
+  
+
+
   return (
-    
-      <Formik initialValues={initialValues} validationSchema={validate}>
-        {(formik) => (
-          <div>
-            <div
-              className="my-4 font-weight-bold-display-4"
-              className="contact-title"
-            >
-              <H2>Create New Activity</H2>
-            </div>
-            <Form className="Form">
-              <div className="form-field">
-                <TextField
-                  label="Activity Name*"
-                  name="name"
-                  type="text"
-                  className="input"
-                />
-              </div>
-              <div className="form-field">
-                <TextField
-                  label="Enter Difficulty Level"
-                  name="attribute1"
-                  type="text"
-                  className="input"
-                />
-              </div>
-              <div className="form-field">
-                <TextField
-                  label="Enter Activity Duration"
-                  name="attribute2"
-                  type="text"
-                  className="input"
-                />
-              </div>
-              <div className="form-field">
-                <TextField
-                  label="Please Select the Season"
-                  name="attribute3"
-                  type="text"
-                  className="input"
-                />
-              </div>
-              <div className="form-field">
-                <TextField
-                  label="Select the Activity Countrry"
-                  name="attribute4"
-                  type="text"
-                  className="input"
-                />
-              </div>
-
-              <div className="but">
-                <div className="form-field f-button">
-                  <PrimaryButton title="create" type="submit" formik={formik} />
-                </div>
-
-                <div className="form-field f-button">
-                  <ResetButton className="buttin" type="reset">
-                    Reset
-                  </ResetButton>
-                </div>
-              </div>
-            </Form>
+    <Formik initialValues={initialValues} validationSchema={validate} dispatch={dispatch}
+    onSubmit={async (values,{ resetForm }) => {
+      
+      await new Promise((r) => setTimeout(r, 500));
+      await dispatch(createActivity(values))
+      resetForm()
+    }} >
+      {(formik) => (
+        <div>
+          <div
+            className="my-4 font-weight-bold-display-4"
+            className="contact-title"
+          >
+            <H2>Create New Activity</H2>
           </div>
-        )}
-      </Formik>
-    
+          <Form className="Form"  >
+          <Diiv className="form-field" name="id"   />
+            <div className="form-field">
+              <TextField
+                label="Activity Name*"
+                name="name"
+                type="text"
+                className="input"
+              />
+            </div>
+            <div className="form-field">
+              <TextField
+                label="Enter Difficulty Level * (1 to 5)"
+                name="difficulty"
+                type="number"
+                className="input"
+              />
+            </div>
+            <div className="form-field">
+              <TextField
+                label="Enter Activity Duration - Calculated in hours (1 to 24)"
+                name="duration"
+                type="number"
+                className="input"
+              />
+            </div>
+            <div className="form-field">
+             
+              <CheckBoxField
+                label="Please Select the Season"
+                name="season"
+                //type="text"
+                className="input"
+              />
+            </div>
+            <div className="form-field">
+              <SelectField
+                label="Select the Activity Countrry"
+                as="select"
+                name="country"
+                className="input"
+              ></SelectField>
+              
+            </div>
+            <pre>{JSON.stringify(formik, null, 4)}</pre>
+            <div className="but">
+              <div className="form-field f-button">
+                <PrimaryButton title="create" type="submit" formik={formik} />
+              </div>
+
+              <div className="form-field f-button">
+                <ResetButton className="buttin" type="reset">
+                  Reset
+                </ResetButton>
+              </div>
+            </div>
+          </Form>
+        </div>
+      )}
+    </Formik>
   );
 }
 
+const Diiv = styled.div`
+display: none;
+`;
 const ResetButton = styled.button`
   background-color: var(--primary-color);
   padding: 0.8rem 2.5rem;
@@ -136,9 +155,9 @@ const ResetButton = styled.button`
   }
 `;
 const H2 = styled.h2`
-font-size: 60px;
-margin-bottom: 60px;
-color: var(--font-light-color);
+  font-size: 60px;
+  margin-bottom: 60px;
+  color: var(--font-light-color);
 `;
 
-export default CreateForm;
+export default connect(null,{createActivity}) (CreateForm);

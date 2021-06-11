@@ -14,9 +14,7 @@ function Create() {
             <div className="left-content">
               <CreateForm />
             </div>
-            <Div className="right-content">
-              <Image src={rocketImg} alt="" />
-            </Div>
+           
           </InnerLayout>
         </ContactPageStyled>
       </Container>

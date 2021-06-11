@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getCountry, clearUser } from "../actions";
+import { getCountry, clearUser } from "../redux/actions"
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";

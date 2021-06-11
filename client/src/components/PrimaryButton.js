@@ -17,7 +17,7 @@ function PrimaryButton({title,formik}) {
         });;
    
     return (
-        <PrimaryButtonStyled disabled={!formik.isValid || !formik.dirty} onClick={notify}> 
+        <PrimaryButtonStyled disabled={!formik.isValid || !formik.dirty} onClick={notify} type="submit"> 
             {title}
             <ToastContainer
 position="top-left"

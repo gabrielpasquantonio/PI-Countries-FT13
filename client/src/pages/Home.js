@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import logo from "../assets/colombo.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCountries,searchCountry } from "../actions";
+import { getAllCountries,searchCountry } from "../redux/actions"
 
 const searchCountrry = async (country) => {
   try {
