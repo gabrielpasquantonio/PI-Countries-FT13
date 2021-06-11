@@ -3,12 +3,14 @@ import userPhoto from "../assets/avatar.png";
 import { NavLink } from "react-router-dom";
 import Henry from "../assets/logo.png";
 import Home from "../assets/home-icon.svg";
-
-import React from "react";
+import favoriteContext from "../context/favoritesContext";
+import React,{useContext} from "react";
 
 
 function Header() {
  
+  const {favoriteCountry} = useContext(favoriteContext);
+
 
   return (
     <Nav>
@@ -32,7 +34,7 @@ function Header() {
         
         <NavLink exact to="/favorite" className="favorite">
           <a>
-            <span>❤️FAVORITE</span>
+            <span>❤️{favoriteCountry.length} FAVORITES</span>
           </a>
         </NavLink>
       </NavMenu>

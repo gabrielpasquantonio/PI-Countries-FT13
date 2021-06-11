@@ -5,8 +5,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import logo from "../assets/colombo.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCountries } from "../redux/actions"
-import Filter from '../components/Filter'
+import { getAllCountries } from "../redux/actions";
+import Filter from "../components/Filter";
 const searchCountrry = async (country) => {
   try {
     let url = `http://localhost:3001/countries?name=%22${country}%22`;
@@ -27,48 +27,43 @@ function Home() {
   const dispatch = useDispatch();
   const countries = useSelector((state) => state.countries);
 
-  let limit = 30; // with this limit we change the limit of countries shown per page
-let pageInfo = limit*page
-console.log(limit,pageInfo)
+  var limit = 30; // with this limit we change the limit of countries shown per page
+  var pageInfo = limit * page;
+
   useEffect(() => {
-   
-      dispatch(getAllCountries(limit, limit * page));
-      setTotal(Math.ceil(250 / limit));
-    
+    dispatch(getAllCountries((limit = 30), limit * page));
+    setTotal(Math.ceil(250 / limit));
   }, [page]);
 
-
-
+  
 
   const onSearch = async (country) => {
     //setLoading(true)
-console.log(data)
+    console.log(data);
     if (!country) {
-      console.log("nothing happend");
       setNotFound(false);
-      setData(null); return 
+      setData(null);
+      return;
     }
     setLoading(true);
-  
-     const result = await searchCountrry(country);
+
+    const result = await searchCountrry(country);
     console.log(result);
     if (!result) {
       setNotFound(true);
       setLoading(false);
       return;
     } else {
-       setData(result);
-      
+      setData(result);
     }
     setLoading(false);
-   
   };
- 
+
   return (
     <div>
       <Header />
       <SearchBar onSearch={onSearch} />
-          
+
       {notFound ? (
         <Div className="not-found-text">
           <h1>Sorry, Country not found! </h1>
@@ -76,17 +71,18 @@ console.log(data)
         </Div>
       ) : (
         <>
-        <Filter limit={limit} pageInfo={pageInfo}/>
-        <Countries 
-         data={data}
-         countries={countries}
-          loading={loading}
-          page={page}
-          setPage={setPage}
-          total={total}
-        /></>
+          <Filter limit={limit} pageInfo={pageInfo} page={page} />
+          <Countries
+            data={data}
+            countries={countries}
+            loading={loading}
+            page={page}
+            setPage={setPage}
+            total={total}
+           
+          />
+        </>
       )}
-      
     </div>
   );
 }

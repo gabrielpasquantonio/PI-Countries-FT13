@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 import { filteredData, getAllCountries, orderedData } from "../redux/actions";
 
 function Filter(props) {
-  const { limit, pageInfo } = props;
-
+  const { limit, pageInfo,page} = props;
+ 
+var pageUpdated = page +1
   function handleSelectedRegion(event) {
-    props.filter([...props.countriesData], { region: event.target.value });
-    console.log(props.countries); // filter de Redux
+    props.filter([...props.countriesData], { region: event.target.value }); // filter de Redux
     if (event.target.value === "SelectContinent") {
       props.getAllCountries(limit, pageInfo);
     }
@@ -33,7 +33,29 @@ function Filter(props) {
       props.getAllCountries(limit, pageInfo);
     }
   }
-
+  function handlePages(event) {
+    if (event.target.value === "SelectPage") {
+      let limit = 10;
+      props.getAllCountries(limit, limit*pageUpdated);
+    }
+    if (event.target.value === "250") {
+      let limit = 250;
+      props.getAllCountries(limit, limit*pageUpdated);
+    }
+    if (event.target.value === "30") {
+      let limit = 30;
+      props.getAllCountries(limit, limit*pageUpdated);
+    }
+    if (event.target.value === "50") {
+      let limit = 50;
+      props.getAllCountries(limit, pageUpdated);
+    }
+    if (event.target.value === "100") {
+      let limit = 100;
+      props.getAllCountries(limit, pageUpdated);
+    }
+  };
+  
   return (
     <div className={styles.container}>
       <div>
@@ -74,6 +96,16 @@ function Filter(props) {
           <option value="autumn"> Autumn</option>
           <option value="winter">Winter</option>
           <option value="spring"> Spring</option>
+        </select>
+      </div>
+      <div>
+        <label>Display: </label>
+        <select className={styles.btnfilter} onChange={handlePages}>
+          <option label="Select" value="SelectPage"></option>
+          <option value="250" > All Countries</option>
+          <option value="30" > 30 Countries</option>
+          <option value="50" >50 Countries</option>
+          <option value="100" > 100 Countries</option>
         </select>
       </div>
     </div>

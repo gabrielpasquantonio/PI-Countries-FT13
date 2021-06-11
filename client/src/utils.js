@@ -63,22 +63,21 @@ const searchCountry = async (country) => {
       const dataOrdenadaClear = data.filter((item) => item.area && item )
       sortedData = dataOrdenadaClear.sort((a, b) => {
         
-        const aresult = a.area / a.population
-        const bresult = b.area / b.population
+        
         
         if (option.population === "Descendent") {
          
-          if (aresult < bresult) {
+          if (a.population < b.population) {
             return 1;
           }
-          if (aresult > bresult) {
+          if (a.population > b.population) {
             return -1;
           }
         } else {
-          if (aresult > bresult) {
+          if (a.population > b.population) {
             return 1;
           }
-          if (aresult < bresult) {
+          if (a.population < b.population) {
             return -1;
           }
         }

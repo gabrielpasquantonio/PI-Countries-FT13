@@ -1,14 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getCountry, clearUser } from "../redux/actions"
-import { useEffect } from "react";
+import { useEffect,useContext } from "react";
 import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import StarRating from "./starRating";
 import "../App.css";
+import FavoriteContext from "../context/favoritesContext";
 
-function CountryDetail() {
+
+ function  CountryDetail() {
+  const {favoriteCountry,updateFavoriteCountry}=useContext(FavoriteContext);
   const dispatch = useDispatch();
   const countryDetail = useSelector((state) => state.countryName);
   const { id } = useParams();
@@ -20,7 +23,22 @@ function CountryDetail() {
     };
   }, [dispatch, id]);
 
+
+console.log(favoriteCountry)
+
+console.log(countryDetail)
+  
   const redHeart = "❤️";
+  const blackHeart = "🖤";
+
+
+//const heart =  favoriteCountry.includes(countryDetail.id) ? redHeart : blackHeart
+
+const clickHeart = (e) =>{
+    e.preventDefault();
+    updateFavoriteCountry(id);
+   
+}
 
   if (countryDetail === null) {
     return <Div>Country not found</Div>;
@@ -36,8 +54,8 @@ function CountryDetail() {
             </NavLink>
 
             <div>
-              <Button>
-                <Favorite>{redHeart}</Favorite>
+              <Button onClick={clickHeart} >
+                <Favorite>{favoriteCountry && favoriteCountry.includes(countryDetail.id) ? redHeart : blackHeart}</Favorite>
               </Button>
             </div>
           </First>

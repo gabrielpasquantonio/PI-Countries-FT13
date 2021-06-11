@@ -26,7 +26,6 @@ export function getCountry(id) {
     axios
       .get(`http://localhost:3001/countries/${id}`)
       .then((response) => {
-        console.log(response.data);
         dispatch({ type: SET_COUNTRIENAME, payload: response.data });
       })
       .catch((error) => {

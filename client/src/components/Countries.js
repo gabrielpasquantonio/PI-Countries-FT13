@@ -6,8 +6,7 @@ import React, { useState, useEffect } from "react";
 function Countries(props) {
 const {  loading, page, setPage, total,countries,data } = props;
 
-console.log(data)
-console.log(countries)
+
 
   const previousPage = () => {
     const nextPage = Math.max(page - 1, 0);
@@ -19,6 +18,11 @@ console.log(countries)
     setPage(nextPage);
   };
 
+
+
+
+
+  
   return (
     <div>
       {data? (
