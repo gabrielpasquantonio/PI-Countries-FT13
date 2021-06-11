@@ -107,7 +107,7 @@ function CreateForm() {
               ></SelectField>
               
             </div>
-            <pre>{JSON.stringify(formik, null, 4)}</pre>
+            {/*<pre>{JSON.stringify(formik, null, 4)}</pre>*/}
             <div className="but">
               <div className="form-field f-button">
                 <PrimaryButton title="create" type="submit" formik={formik} />

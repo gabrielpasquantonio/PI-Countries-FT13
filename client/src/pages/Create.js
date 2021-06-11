@@ -9,14 +9,14 @@ function Create() {
     <div>
       <Header />
       <Container>
-        <ContactPageStyled>
+    
           <InnerLayout className={"contact-section"}>
             <div className="left-content">
               <CreateForm />
             </div>
            
           </InnerLayout>
-        </ContactPageStyled>
+     
       </Container>
     </div>
   );

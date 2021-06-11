@@ -48,7 +48,9 @@ function SelectField({ label, ...props }) {
 
 
 const Select = styled.select`
-height: 500px;
-
+margin-top:10px;
+height: 1000px;
 `;
+
+
 export default SelectField;

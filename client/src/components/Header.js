@@ -29,6 +29,7 @@ function Header() {
             <span>CREATE</span>
           </a>
         </NavLink>
+        
         <NavLink exact to="/favorite" className="favorite">
           <a>
             <span>❤️FAVORITE</span>

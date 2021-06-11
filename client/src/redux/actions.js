@@ -1,13 +1,15 @@
+import { filterData, ordenado } from "../utils";
 import axios from "axios";
 import {
   SET_COUNTRIES,
   SET_COUNTRIENAME,
   SEARCH_COUNTRIES,
-  CREATE_ACTIVITY
+  CREATE_ACTIVITY,
+  FILTER_COUNTRY
 } from "./actionsNames";
 
 
-export function getAllCountries(limit = 10, offset = 0) {
+export function getAllCountries(limit = 30, offset = 0) {
   return (dispatch) => {
     axios
       .get(`http://localhost:3001/countries?limit=${limit}&offset=${offset}`)
@@ -17,6 +19,7 @@ export function getAllCountries(limit = 10, offset = 0) {
       });
   };
 }
+
 export function getCountry(id) {
   return (dispatch) => {
     axios
@@ -61,6 +64,16 @@ export function createActivity(form) {
       });
   };
 }
+
+
+export function filteredData(data, option) {
+  return async function (dispatch) {
+    filterData(data, option).then((data) =>
+      dispatch({ type: FILTER_COUNTRY, payload: data })
+    );
+  };
+}
+
 
 export function clearUser() {
   return {
