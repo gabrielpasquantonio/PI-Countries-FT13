@@ -15,7 +15,7 @@ const searchCountry = async (country) => {
         (
           item // asigno a DF los filtros.
         ) =>
-          item.db.Activity.find(
+          item.activities.find(
             (item) => item.season.toLowerCase() === option.season.toLowerCase()
           ) // aca filtro la season con la dataparafiltrar
       );

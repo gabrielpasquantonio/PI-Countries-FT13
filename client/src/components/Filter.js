@@ -18,7 +18,12 @@ console.log(limit,pageInfo)
       props.getAllCountries(limit,pageInfo);
     }
   }
-
+  function handleSelectedSeason(event) {
+    if (event.target.value === "SelectSeason") {
+      props.getAllCountries(limit,pageInfo);
+    }
+    props.filter([...props.countriesData], { season: event.target.value });
+  }
   return (
     <div className={styles.container}>
       <div>
@@ -51,13 +56,12 @@ console.log(limit,pageInfo)
 
       <div>
         <label>Filter by Turistic Act: </label>
-        <select  className={styles.btnfilter}>
+        <select  className={styles.btnfilter} onChange={handleSelectedSeason}>
           <option label="Select" value="SelectSeason"></option>
-          <option value="Verano"> Summer</option>
-          <option value="Otoño"> Autumn</option>
-          <option value="Invierno">Winter</option>
-          <option value="Primavera"> Spring</option>
-          <option value="AllSeasons"> All seasons</option>
+          <option value="summer"> Summer</option>
+          <option value="autumn"> Autumn</option>
+          <option value="winter">Winter</option>
+          <option value="spring"> Spring</option>
         </select>
       </div>
     </div>
