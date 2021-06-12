@@ -40,15 +40,8 @@ function Header() {
       </NavMenu>
 
       <SignOut>
-        <UserImg src={userPhoto} alt="Gabriel Pasquantonio" />
-        <DropDown>
-          <a
-            href="https://gabriel-pasquantonio-portfolio.web.app"
-            target="blanc"
-          >
-            <span>About me</span>
-          </a>
-        </DropDown>
+        <UserImg src={userPhoto} alt="Gabriel Pasquantonio" href="https://gabriel-pasquantonio-portfolio.web.app"  target="blanc"/>
+       
       </SignOut>
      
     </Nav>

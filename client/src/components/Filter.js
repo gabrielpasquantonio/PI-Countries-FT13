@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./styles.module.css";
+import styled from 'styled-components'
 import { connect } from "react-redux";
 import { filteredData, getAllCountries, orderedData } from "../redux/actions";
 
@@ -36,79 +36,79 @@ var pageUpdated = page +1
   function handlePages(event) {
     if (event.target.value === "SelectPage") {
       let limit = 10;
-      props.getAllCountries(limit, limit*pageUpdated);
+      props.getAllCountries(limit, limit*pageInfo);
     }
     if (event.target.value === "250") {
       let limit = 250;
-      props.getAllCountries(limit, limit*pageUpdated);
+      props.getAllCountries(limit, limit*pageInfo);
     }
     if (event.target.value === "30") {
       let limit = 30;
-      props.getAllCountries(limit, limit*pageUpdated);
+      props.getAllCountries(limit, limit*pageInfo);
     }
     if (event.target.value === "50") {
       let limit = 50;
-      props.getAllCountries(limit, pageUpdated);
+      props.getAllCountries(limit, pageInfo);
     }
     if (event.target.value === "100") {
       let limit = 100;
-      props.getAllCountries(limit, pageUpdated);
+      props.getAllCountries(limit, pageInfo);
     }
   };
   
   return (
-    <div className={styles.container}>
-      <div>
-        <label>Filter by Region: </label>
+    <Container>
+      <Div>
+        <Label>Filter by Region: </Label>
 
-        <select onChange={handleSelectedRegion}>
+        <Select onChange={handleSelectedRegion}>
           <option label="Select" value="SelectContinent"></option>
           {props.region.map((item) => {
             return <option value={item}>{item}</option>;
           })}
-        </select>
-      </div>
-      <div>
-        <label>Order by Population: </label>
-        <select
+        </Select>
+      </Div>
+      <Div>
+        <Label>Order by Population: </Label>
+        <Select
           onChange={handleSelectedPopulation}
-          className={styles.btnfilter}
+         
         >
           <option label="Select" value="SelectPopulation"></option>
           <option value="Ascendent" label="Ascendent"></option>
           <option value="Descendent" label="Descendent"></option>
-        </select>
-      </div>
-      <div>
-        <label>Order by Name: </label>
-        <select onChange={handleSelectedName} className={styles.btnfilter}>
+        </Select>
+      </Div>
+      <Div>
+        <Label>Order by Name: </Label>
+        <Select onChange={handleSelectedName} >
           {/* <option label="Select  " value="SelectPopulation" ></option>    */}
           <option value="Ascendent">A-Z</option>
           <option value="Descendent">Z-A</option>
-        </select>
-      </div>
+        </Select>
+      </Div>
 
-      <div>
-        <label>Filter by Turistic Act: </label>
-        <select className={styles.btnfilter} onChange={handleSelectedSeason}>
+      <Div>
+        <Label>Filter by Turistic Act: </Label>
+        <Select  onChange={handleSelectedSeason}>
           <option label="Select" value="SelectSeason"></option>
           <option value="summer"> Summer</option>
           <option value="autumn"> Autumn</option>
           <option value="winter">Winter</option>
           <option value="spring"> Spring</option>
-        </select>
-      </div>
-      <div>
-        <label>Display: </label>
-        <select className={styles.btnfilter} onChange={handlePages}>
+        </Select>
+      </Div>
+      <Div>
+        <Label>Display: </Label>
+        <Select  onChange={handlePages}>
           <option label="Select" value="SelectPage"></option>
           <option value="250" > All Countries</option>
           <option value="30" > 30 Countries</option>
           <option value="50" >50 Countries</option>
           <option value="100" > 100 Countries</option>
-        </select>
-      </div>
-    </div>
+        </Select>
+      </Div>
+    </Container>
   );
 }
 
@@ -127,4 +127,75 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(getAllCountries(limit, offset)),
   };
 };
+
+const Div = styled.div`
+display:row;
+@media (max-width: 768px) {
+    display: flex;
+    margin-top: 5px;
+  }
+`;
+
+
+const Container = styled.div`
+
+  
+  flex-direction:row;
+  border-style: solid; 
+  border-color: rgba(249, 249, 249, 0.8);
+  border-width: 0.1px;
+  display: flex;
+  margin: 0px 10px;
+
+  flex: 1;
+  
+  padding: 10px;
+  @media (max-width: 768px) {
+    flex-direction:column;
+    justify-content: space-between;
+  }
+`;
+
+
+const Label = styled.label`
+margin-right: 10px;
+color:rgb(255, 255, 255);
+  font-size: 17px;
+  font-weight: bold;
+  @media (max-width: 768px) {
+    font-size: 15px;
+    margin-right: 10px;
+  }
+`; 
+const Select = styled.select`
+margin-right: 10px;
+  background: rgb(189,200,222);
+border-radius: 7px;
+font-size: 17px;
+@media (max-width: 768px) {
+    font-size: 15px;
+    border-radius: 7px;
+  }
+`;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);

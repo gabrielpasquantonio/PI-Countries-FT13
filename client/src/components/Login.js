@@ -32,6 +32,11 @@ align-items: center;
 h4{
   font-size: larger;
 }
+@media only screen and (max-width: 768px) {
+  h4{
+  font-size:22px
+}
+}
 `;
 const Container = styled.section`
   overflow: hidden;
@@ -81,6 +86,7 @@ const CTA = styled.div`
   transition-timing-function: ease-out;
   transition: opacity 0.2s;
   width: 100%;
+
 `;
 
 const CTALogoOne = styled.img`
@@ -89,6 +95,9 @@ const CTALogoOne = styled.img`
   min-height: 1px;
   display: block;
   width: 100%;
+  @media only screen and (max-width: 768px) {
+    max-width: 90px;
+}
 `;
 const SignUp = styled.a`
   font-weight: bold;
@@ -104,6 +113,9 @@ const SignUp = styled.a`
   &:hover {
     background-color: #0483ee;
   }
+  @media only screen and (max-width: 768px) {
+    font-size: 15px;
+}
 `;
 
 const Description = styled.h2`
@@ -112,6 +124,10 @@ const Description = styled.h2`
   margin: 0 0 24px;
   line-height: 1.6;
   letter-spacing: 1.8px;
+  @media only screen and (max-width: 768px) {
+    font-size: 15px;
+    display: flex;
+}
 `;
 
 export default Login;

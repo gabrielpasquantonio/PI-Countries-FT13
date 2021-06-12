@@ -43,8 +43,13 @@ const Container = styled.div`
   align-items: center;
   flex: 1;
   align-items: stretch;
-  margin-top: 120px;
-  padding: 20px;
+  margin-top: 80px;
+  padding: 5px;
+   margin-bottom: 5px;
+  @media (max-width: 768px) {
+   padding: 5px;
+   margin-bottom: 5px;
+  }
 `;
 
 const Button = styled.button`
@@ -55,6 +60,9 @@ const Button = styled.button`
   color: white;
   padding: 10px 12px;
   margin-left: 20px;
+  @media (max-width: 768px) {
+   font-size: medium;
+  }
 `;
 
 
@@ -66,11 +74,14 @@ padding: 10px;
   border-radius: 3px;
   border: none;
   width: 100%;
+  @media (max-width: 768px) {
+   font-size: medium;
+  }
 `;
 
 
 const Div = styled.div`background: white;
-padding-right: 20px;
+
 flex: 1;
 `;
 

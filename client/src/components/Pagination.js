@@ -12,12 +12,18 @@ function Pagination(props) {
         <Paginationn>
             {!favorite? (<>
             <Button onClick={onLeftClick}><LeftArrow /></Button>
-            <div>{page} de {totalPages}</div>
+            <H2>{page} de {totalPages}</H2>
             <Button onClick={onRightClick}><RightArrow /></Button></>):(<Div></Div>)}
         </Paginationn>
     )
 }
 
+
+const H2 = styled.div`
+@media (max-width: 768px) {
+    font-size: small;
+  }
+`;
 
 
 const Paginationn = styled.div`
@@ -37,6 +43,13 @@ background-color: #363636;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  @media (max-width: 768px) {
+    margin-top: 5px;
+    padding: 10px;
+    width: 32px;
+    margin: 0px 4px;
+    height: 22px;
+  }
 `;
 
 const Div = styled.div`

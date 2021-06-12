@@ -66,7 +66,7 @@ function Home() {
 
       {notFound ? (
         <Div className="not-found-text">
-          <h1>Sorry, Country not found! </h1>
+          <H1>Sorry, Country not found! </H1>
           <Img src={logo} alt="loading..." />
         </Div>
       ) : (
@@ -86,6 +86,18 @@ function Home() {
     </div>
   );
 }
+
+
+const H1 = styled.h1`
+ @media (max-width: 768px) {
+    font-size:30px;
+  }
+  @media (max-width: 1200px) and (min-width: 769px) {
+    font-size:50px;
+  }
+  margin-bottom: 20px;
+`;
+
 
 const Div = styled.div`
   text-align: center;

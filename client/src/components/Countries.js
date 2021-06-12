@@ -35,7 +35,7 @@ function Countries(props) {
         <>
         
           <Container>
-            <h1>Countries </h1>
+            <H1>Countries </H1>
           </Container>
           <Content>
             {data ? (
@@ -46,24 +46,24 @@ function Countries(props) {
                   </Link>
                 </Wrap>
                 <Bottom>
-                  <>
-                    <h4>Name: {data.name}</h4>
-                    <h4>Region: {data.region}</h4>
-                  </>
-                  <button onClick={clickHeart}>
+                  <Div>
+                    <H4>Name: {data.name}</H4>
+                    <H4>Region: {data.region}</H4>
+                  </Div>
+                  <Button onClick={clickHeart}>
                     <Favorite>{favoriteCountry && favoriteCountry.includes(data.id) ? redHeart : blackHeart}</Favorite>
-                  </button>
+                  </Button>
                 </Bottom>
               </Card>
             ) : (
-              <h1>Loading...</h1>
+              <H1>Loading...</H1>
             )}
           </Content>
         </>
       ) : (
         <>
           <Container>
-          {!favorite?(<h1>Countries </h1>):(<h1>Favorite Countries </h1>)}
+          {!favorite?(<H1>Countries </H1>):(<H1>Favorite Countries </H1>)}
             <Pagination
               page={page + 1}
               totalPages={total}
@@ -82,18 +82,18 @@ function Countries(props) {
                     </Link>
                   </Wrap>
                   <Bottom>
-                    <>
-                    <h4>Name: {country.name}</h4>
-                    <h4>Region: {country.region}</h4>
-                    </>
-                    <button onClick={() => updateFavoriteCountry(country.id)}>
+                    <Div>
+                    <H4>Name: {country.name}</H4>
+                    <H4>Region: {country.region}</H4>
+                    </Div>
+                    <Button onClick={() => updateFavoriteCountry(country.id)}>
                     <Favorite>{favoriteCountry && favoriteCountry.includes(country.id) ? redHeart : blackHeart}</Favorite>
-                  </button>
+                  </Button>
                   </Bottom>
                 </Card>
               ))
             ) : (
-              <h1>Loading...</h1>
+              <H1>Loading...</H1>
             )}
           </Content>
         </>
@@ -101,6 +101,29 @@ function Countries(props) {
     </div>
   );
 }
+
+const Button = styled.button`
+background-color:transparent;
+height: 40px;
+`;
+
+const Div = styled.div`
+display: row;
+`;
+const H4 = styled.h4`
+display: flex;
+justify-content: space-between;
+@media (max-width: 768px) {
+    font-size: smaller;
+  }
+`;
+
+const H1 =styled.h1`
+ @media (max-width: 768px) {
+    font-size: x-large;
+  }
+`;
+
 
 const Favorite = styled.div`
 `;
@@ -111,13 +134,30 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 40px;
+  padding: 20px;
+  @media (max-width: 1280px) {
+    margin-top: 5px;
+    padding: 10px;
+  }
+  @media (max-width: 768px) {
+    margin-top: 5px;
+    padding: 10px;
+  }
 `;
 
 const Bottom = styled.div`
   margin-top: 20px;
-  display: row;
+  display: flex;
+  justify-content: space-between;
   padding: 20px;
+  @media (max-width: 768px) {
+    margin-top: 5px;
+    padding: 10px;
+  }
+  @media (max-width: 1280px) {
+    margin-top: 5px;
+    padding: 10px;
+  }
 `;
 
 const Card = styled.div`
@@ -134,20 +174,34 @@ const Card = styled.div`
   }
 `;
 const Content = styled.div`
-  padding: 40px;
-  margin-top: 100px;
+  padding: 20px;
+  
   display: grid;
   grid-gap: 25px;
   gap: 25px;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  @media (max-width: 768px) {
+  @media (max-width: 1280px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 10px;
+  }
+  @media (max-width: 780px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 10px;
+  }
+  @media (max-width: 650px) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    padding: 10px;
+  }
+  @media (max-width: 400px) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    padding: 10px;
   }
 `;
 
 const Wrap = styled.div`
   padding-top: 56.25%;
   border-radius: 10px;
+ 
   box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
     rgb(0 0 0 / 73%) 0px 16px 10px -10px;
   cursor: pointer;
@@ -166,6 +220,7 @@ const Wrap = styled.div`
     width: 100%;
     z-index: 1;
     top: 0;
+   
   }
 `;
 export default Countries;
