@@ -3,15 +3,17 @@ import styled from 'styled-components'
 import { LeftArrow, RightArrow } from "./Arrows";
 
 function Pagination(props) {
-    const {onLeftClick, onRightClick, page,setPage, totalPages}= props;
+    const {onLeftClick, onRightClick, page,setPage, totalPages,favorite}= props;
 
 
     
     return (
+
         <Paginationn>
+            {!favorite? (<>
             <Button onClick={onLeftClick}><LeftArrow /></Button>
             <div>{page} de {totalPages}</div>
-            <Button onClick={onRightClick}><RightArrow /></Button>
+            <Button onClick={onRightClick}><RightArrow /></Button></>):(<Div></Div>)}
         </Paginationn>
     )
 }
@@ -37,5 +39,7 @@ background-color: #363636;
   cursor: pointer;
 `;
 
-
+const Div = styled.div`
+display:none
+`;
 export default Pagination

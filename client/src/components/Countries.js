@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Pagination from "../components/Pagination";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
+import FavoriteContext from "../context/favoritesContext";
+
 
 function Countries(props) {
-const {  loading, page, setPage, total,countries,data } = props;
-
-
-
+  const { loading, page, setPage, total, countries, data,favorite } = props;
+  const {favoriteCountry,updateFavoriteCountry}=useContext(FavoriteContext);
+  
   const previousPage = () => {
     const nextPage = Math.max(page - 1, 0);
     setPage(nextPage);
@@ -19,21 +20,25 @@ const {  loading, page, setPage, total,countries,data } = props;
   };
 
 
+  const redHeart = "❤️";
+  const blackHeart = "🖤";
+  const clickHeart = (e) =>{
+    e.preventDefault();
+    updateFavoriteCountry(data.id);
+   
+}
 
 
-
-  
   return (
     <div>
-      {data? (
+      {data ? (
         <>
-        <Container>
-          <h1>Countries </h1>
-          
-        </Container>
-        <Content>
-          {data ? (
-            
+        
+          <Container>
+            <h1>Countries </h1>
+          </Container>
+          <Content>
+            {data ? (
               <Card>
                 <Wrap key={data.name}>
                   <Link to={`/countries/${data.id}`}>
@@ -41,25 +46,30 @@ const {  loading, page, setPage, total,countries,data } = props;
                   </Link>
                 </Wrap>
                 <Bottom>
-                  <h4>Name: {data.name}</h4>
-                  <h4>Region: {data.region}</h4>
+                  <>
+                    <h4>Name: {data.name}</h4>
+                    <h4>Region: {data.region}</h4>
+                  </>
+                  <button onClick={clickHeart}>
+                    <Favorite>{favoriteCountry && favoriteCountry.includes(data.id) ? redHeart : blackHeart}</Favorite>
+                  </button>
                 </Bottom>
               </Card>
-            
-          ) : (
-            <h1>Loading...</h1>
-          )}
-        </Content>
-      </>
+            ) : (
+              <h1>Loading...</h1>
+            )}
+          </Content>
+        </>
       ) : (
         <>
           <Container>
-            <h1>Countries </h1>
+          {!favorite?(<h1>Countries </h1>):(<h1>Favorite Countries </h1>)}
             <Pagination
               page={page + 1}
               totalPages={total}
               onLeftClick={previousPage}
               onRightClick={nextPage}
+              favorite={favorite}
             />
           </Container>
           <Content>
@@ -72,8 +82,13 @@ const {  loading, page, setPage, total,countries,data } = props;
                     </Link>
                   </Wrap>
                   <Bottom>
+                    <>
                     <h4>Name: {country.name}</h4>
                     <h4>Region: {country.region}</h4>
+                    </>
+                    <button onClick={() => updateFavoriteCountry(country.id)}>
+                    <Favorite>{favoriteCountry && favoriteCountry.includes(country.id) ? redHeart : blackHeart}</Favorite>
+                  </button>
                   </Bottom>
                 </Card>
               ))
@@ -86,6 +101,9 @@ const {  loading, page, setPage, total,countries,data } = props;
     </div>
   );
 }
+
+const Favorite = styled.div`
+`;
 
 const Container = styled.div`
   margin-top: 22px;

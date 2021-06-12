@@ -24,9 +24,7 @@ import FavoriteContext from "../context/favoritesContext";
   }, [dispatch, id]);
 
 
-console.log(favoriteCountry)
 
-console.log(countryDetail)
   
   const redHeart = "❤️";
   const blackHeart = "🖤";
