@@ -64,5 +64,10 @@ const PrimaryButtonStyled = styled.button`
   background-color: #cccccc;
   color: #666666;
 }
+
+@media (max-width:508px) {
+    padding: 0.4rem 1.5rem;
+    font-size: small;
+  }
 `;
 export default PrimaryButton;

@@ -89,6 +89,9 @@ function Home() {
 
 
 const H1 = styled.h1`
+ @media (max-width: 322px) {
+    font-size:10px;
+  }
  @media (max-width: 768px) {
     font-size:30px;
   }

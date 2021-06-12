@@ -126,6 +126,8 @@ function CreateForm() {
   );
 }
 
+
+
 const Diiv = styled.div`
 display: none;
 `;
@@ -153,11 +155,20 @@ const ResetButton = styled.button`
     width: 100%;
     background-color: var(--white-color);
   }
+
+   @media (max-width: 508px) {
+    padding: 0.4rem 1.5rem;
+    font-size: small;
+  }
 `;
 const H2 = styled.h2`
   font-size: 60px;
   margin-bottom: 60px;
   color: var(--font-light-color);
+  @media (max-width: 768px) {
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
 `;
 
 export default connect(null,{createActivity}) (CreateForm);

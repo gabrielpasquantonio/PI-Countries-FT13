@@ -49,7 +49,12 @@ function SelectField({ label, ...props }) {
 
 const Select = styled.select`
 margin-top:10px;
-height: 1000px;
+height: 700px;
+
+@media (max-width: 768px) {
+  margin-top:20px;
+height: 400px;
+  }
 `;
 
 
