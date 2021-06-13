@@ -10,7 +10,7 @@ console.log(size)
   const [rating, setRating] =  useState();
   
   return (
-    <div>
+    <Div>
        
       {[...Array(5)].map((star, i) => {
         const ratingValue = i + 1;
@@ -21,18 +21,25 @@ console.log(size)
             <FaStar
               className="star"
               color={ratingValue <= size ? "#ffc107" : "#e4e5e9"}
-              size={50}
+              size={20}
               value={ratingValue}
               
             />
           </label>
         );
       })}
-    </div>
+    </Div>
   );
 };
+
+
+const Div = styled.div`
+
+`;
 
 const Input = styled.input`
   display: none;
 `;
+
+
 export default StarRating;

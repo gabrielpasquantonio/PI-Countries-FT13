@@ -1,10 +1,9 @@
 import Header from '../components/Header'
 import React,{useState,useContext,useEffect} from 'react'
-import styled from "styled-components";
 import Countries from '../components/Countries';
 import Pagination from "../components/Pagination";
 import FavoriteContext from "../context/favoritesContext";
-import { useDispatch, useSelector } from "react-redux";
+import styled from 'styled-components';
 import {searchCountry} from "../utils"
 
 function Favorite() {
@@ -41,12 +40,25 @@ function Favorite() {
 
     return (
         <div>
-        <Header/> 
+        <Header/>  {favoriteCountry >= 0  ? <Div ><H1>You don't have any ❤️ Country...</H1></Div>:<>
        <Countries countries={country}
        favorite={true}
-       />
+       /></>}
         </div>
     )
 }
 
+
+const Div = styled.div`
+top: 785px;
+color: white;
+margin-top: 100px;
+padding: 20px;
+display: flex;
+`;
+
+
+const H1 = styled.h1`
+padding: 20px;
+`;
 export default Favorite

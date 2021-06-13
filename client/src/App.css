@@ -15,7 +15,8 @@
 .autumn{
     background-image: url('./assets/autumn.png');
     background-repeat: no-repeat;
-    background-size: cover;  
+    background-size: cover; 
+    background-position: center; 
 }
 
 .winter{
@@ -28,4 +29,16 @@
     background-image: url('./assets/spring.png');
     background-repeat: no-repeat;
     background-size: cover;  
+}
+
+.alert{
+    background-image: url('./assets/alert.png');
+    
+    background-repeat: no-repeat;
+    
+   
+    
+   
+    background-position: center;
+   
 }

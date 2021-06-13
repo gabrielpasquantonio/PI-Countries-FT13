@@ -63,7 +63,7 @@ function Countries(props) {
       ) : (
         <>
           <Container>
-          {!favorite?(<H1>Countries </H1>):(<H1>Favorite Countries </H1>)}
+          {!favorite?(<H1>Countries </H1>):(<H11>Favorite Countries </H11>)}
             <Pagination
               page={page + 1}
               totalPages={total}
@@ -123,7 +123,12 @@ const H1 =styled.h1`
     font-size: x-large;
   }
 `;
-
+const H11 =styled.h1`
+margin-top:100px;
+ @media (max-width: 768px) {
+    font-size: x-large;
+  }
+`;
 
 const Favorite = styled.div`
 `;
