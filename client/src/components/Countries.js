@@ -15,7 +15,7 @@ function Countries(props) {
   const total = useSelector((state) => state.total)
   const page = useSelector((state) => state.page);
  
-  console.log(page)
+
 
 
   function previous() {
@@ -25,7 +25,7 @@ function Countries(props) {
     props.nextPage(page,total)
   }
  
-console.log(total)
+
  
 
 

@@ -31,38 +31,38 @@ function Home() {
   var pageInfo = limit * page;
 
   useEffect(() => {
-    if (searching) {
+    
       dispatch(getAllCountries(limit, limit * page));
-    }
+    
   }, [page]);
 
   useEffect(() => {
     dispatch(getAllCountries(limit, limit * page));
-    dispatch(setSearching(false));
+    dispatch(setSearching(true));
     dispatch(setTotall(10));
   }, []);
 
   const onSearch = async (country) => {
     //setLoading(true)
-    console.log(data);
+    console.log("this is the data " + country);
     if (!country) {
       setNotFound(false);
       setData(null);
       return;
     }
     setLoading(true);
-
     const result = await searchCountrry(country);
     if (!result) {
       setNotFound(true);
       setLoading(false);
       return;
     } else {
+      setNotFound(false);
       setData(result);
     }
     setLoading(false);
   };
-
+  
   return (
     <div>
       <Header />

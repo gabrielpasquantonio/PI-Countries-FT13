@@ -13,6 +13,7 @@ function Header() {
 
 
   return (
+  
     <Nav>
       <NavLink exact to="/">
         <Logo>
@@ -43,10 +44,20 @@ function Header() {
         <UserImg src={userPhoto} alt="Gabriel Pasquantonio" href="https://gabriel-pasquantonio-portfolio.web.app"  target="blanc"/>
        
       </SignOut>
-     
+        
+
+
+
     </Nav>
+ 
+  
+
+ 
   );
 }
+
+
+
 
 const Nav = styled.nav`
   position: fixed;
@@ -62,6 +73,8 @@ const Nav = styled.nav`
   letter-spacing: 16px;
   z-index: 3;
 `;
+
+
 const Logo = styled.a`
   padding: 0;
   width: 80px;
@@ -77,6 +90,7 @@ const Logo = styled.a`
 const UserImg = styled.img`
   height: 100%;
 `;
+
 const NavMenu = styled.div`
   align-items: center;
   display: flex;
@@ -89,7 +103,7 @@ const NavMenu = styled.div`
   margin-right: auto;
   margin-left: 25px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 468px) {
       display: none;
     }
   

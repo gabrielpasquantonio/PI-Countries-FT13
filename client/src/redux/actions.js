@@ -61,7 +61,6 @@ export function createActivity(form) {
     axios
       .post(`http://localhost:3001/activity`, form)
       .then((response) => {
-        console.log(response.data);
         dispatch({ type: CREATE_ACTIVITY, payload: response.data });
       })
       .catch((error) => {
