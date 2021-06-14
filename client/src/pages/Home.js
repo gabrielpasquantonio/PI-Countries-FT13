@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import logo from "../assets/colombo.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCountries } from "../redux/actions";
+import { getAllCountries, setSearching,setTotall } from "../redux/actions";
 import Filter from "../components/Filter";
 const searchCountrry = async (country) => {
   try {
@@ -20,22 +20,27 @@ function Home() {
   const [notFound, setNotFound] = useState(false);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
-  const [searching, setSearching] = useState(false);
-  const [page, setPage] = useState(0);
-  const [total, setTotal] = useState(0);
 
   const dispatch = useDispatch();
   const countries = useSelector((state) => state.countries);
+  const searching = useSelector((state) => state.searching);
+  const limit = useSelector((state) => state.limit);
+  const page = useSelector((state) => state.page);
 
-  var limit = 30; // with this limit we change the limit of countries shown per page
+  // with this limit we change the limit of countries shown per page
   var pageInfo = limit * page;
 
   useEffect(() => {
-    dispatch(getAllCountries((limit = 30), limit * page));
-    setTotal(Math.ceil(250 / limit));
+    if (searching) {
+      dispatch(getAllCountries(limit, limit * page));
+    }
   }, [page]);
 
-  
+  useEffect(() => {
+    dispatch(getAllCountries(limit, limit * page));
+    dispatch(setSearching(false));
+    dispatch(setTotall(10));
+  }, []);
 
   const onSearch = async (country) => {
     //setLoading(true)
@@ -48,7 +53,6 @@ function Home() {
     setLoading(true);
 
     const result = await searchCountrry(country);
-    console.log(result);
     if (!result) {
       setNotFound(true);
       setLoading(false);
@@ -71,15 +75,18 @@ function Home() {
         </Div>
       ) : (
         <>
-          <Filter limit={limit} pageInfo={pageInfo} page={page} />
+          <Filter
+            limit={limit}
+            pageInfo={pageInfo}
+            page={page}
+            searching={searching}
+          />
           <Countries
             data={data}
             countries={countries}
             loading={loading}
             page={page}
-            setPage={setPage}
-            total={total}
-           
+            
           />
         </>
       )}
@@ -87,20 +94,18 @@ function Home() {
   );
 }
 
-
 const H1 = styled.h1`
- @media (max-width: 322px) {
-    font-size:10px;
+  @media (max-width: 322px) {
+    font-size: 10px;
   }
- @media (max-width: 768px) {
-    font-size:30px;
+  @media (max-width: 768px) {
+    font-size: 30px;
   }
   @media (max-width: 1200px) and (min-width: 769px) {
-    font-size:50px;
+    font-size: 50px;
   }
   margin-bottom: 20px;
 `;
-
 
 const Div = styled.div`
   text-align: center;

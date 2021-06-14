@@ -1,18 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
 import { LeftArrow, RightArrow } from "./Arrows";
-
+import { useDispatch, useSelector } from "react-redux";
 function Pagination(props) {
     const {onLeftClick, onRightClick, page,setPage, totalPages,favorite}= props;
-
-
+    const total = useSelector((state) => state.total);
+ 
     
     return (
 
         <Paginationn>
             {!favorite? (<>
             <Button onClick={onLeftClick}><LeftArrow /></Button>
-            <H2>{page} de {totalPages}</H2>
+            <H2>{page} de {total}</H2>
             <Button onClick={onRightClick}><RightArrow /></Button></>):(<Div></Div>)}
         </Paginationn>
     )

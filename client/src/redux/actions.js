@@ -1,4 +1,4 @@
-import { filterData, order } from "../utils";
+import { filterData, order,search,total } from "../utils";
 import axios from "axios";
 import {
   SET_COUNTRIES,
@@ -6,7 +6,13 @@ import {
   SEARCH_COUNTRIES,
   CREATE_ACTIVITY,
   FILTER_COUNTRY,
-  ORDER_COUNTRY
+  ORDER_COUNTRY,
+  SET_SEARCHING,
+  SET_TOTAL,
+  SET_LIMIT,
+  PREVIOUS_PAGE,
+  NEXT_PAGE,
+  SET_PAGE
 } from "./actionsNames";
 
 
@@ -88,10 +94,64 @@ export function orderedData(data, option) {
 
 
 
+export function setSearching(data) {
+  return async function (dispatch) {
+    search(data).then((data) =>
+      dispatch({ type: SET_SEARCHING, payload: data })
+    );
+    // falta el reducers, componentes, filtrado y pagina detalle, formulario controlado, el temperamento tmabien
+  };
+}
+
+export function setTotall(data) {
+  return async function (dispatch) {
+    total(data).then((data) =>
+      dispatch({ type: SET_TOTAL, payload: data })
+    );
+    // falta el reducers, componentes, filtrado y pagina detalle, formulario controlado, el temperamento tmabien
+  };
+}
 
 export function clearUser() {
   return {
     type: SET_COUNTRIENAME,
     payload: undefined,
+  };
+}
+
+export function setLimit(limit) {
+  return {
+    type: SET_LIMIT,
+    payload: limit,
+  };
+}
+
+export function previousPage(page) {
+  return  {
+   
+    
+     type: PREVIOUS_PAGE, payload: Math.max(page - 1,0) 
+    
+    // falta el reducers, componentes, filtrado y pagina detalle, formulario controlado, el temperamento tmabien
+  };
+}
+
+export function nextPage(page,total) {
+  return  {
+   
+    
+     type: NEXT_PAGE, payload: Math.min(page + 1,total-1) 
+    
+    // falta el reducers, componentes, filtrado y pagina detalle, formulario controlado, el temperamento tmabien
+  };
+}
+
+export function setPage() {
+  return  {
+   
+    
+     type: SET_PAGE, payload: 0
+    
+    // falta el reducers, componentes, filtrado y pagina detalle, formulario controlado, el temperamento tmabien
   };
 }

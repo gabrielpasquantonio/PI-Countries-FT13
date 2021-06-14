@@ -10,7 +10,7 @@ function processActivity(props) {
       id: props.id,
       name: props.name,
       duration: props.duration,
-      season: props.duration,
+      season: props.season,
       difficulty: props.difficulty,
       country:props.country,
     };

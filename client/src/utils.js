@@ -1,5 +1,16 @@
 
+export async function  total(data) {
+const a = await  Math.ceil(250 / data)
+return a 
+};
 
+export async function  search(country) {
+  if(country){
+    return false
+  }else{
+    return true
+  }
+};
 
 export const searchCountry = async (country) => {
     try {
@@ -41,8 +52,6 @@ export const searchCountry = async (country) => {
      
       sortedData = data.sort((a, b) => {
         if (option.name === "Descendent") {
-          console.log("this is "+ a.name)
-          console.log("this is b  " + b.name)
           // https://developer.mozilla.org/es/search?q=sort
           if (a.name < b.name) {
             return 1;

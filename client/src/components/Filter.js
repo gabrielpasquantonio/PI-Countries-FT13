@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from "react";
-import styled from 'styled-components'
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
 import { connect } from "react-redux";
-import { filteredData, getAllCountries, orderedData } from "../redux/actions";
+import {
+  filteredData,
+  getAllCountries,
+  orderedData,
+  setSearching,
+  setTotall,
+  setLimit,
+  setPage
+} from "../redux/actions";
 
 function Filter(props) {
-  const { limit, pageInfo,page} = props;
- 
-var pageUpdated = page +1
+  const {pageInfo, page } = props;
+  const total = useSelector((state) => state.total);
+  const limit = useSelector((state) => state.limit);
+
+
+
+  
   function handleSelectedRegion(event) {
     props.filter([...props.countriesData], { region: event.target.value }); // filter de Redux
     if (event.target.value === "SelectContinent") {
@@ -21,41 +34,56 @@ var pageUpdated = page +1
   }
 
   function handleSelectedName(event) {
-    console.log([...props.countriesData]);
     props.order([...props.countriesData], { name: event.target.value });
-    console.log(
-      props.order([...props.countriesData], { name: event.target.value })
-    );
   }
-  function handleSelectedPopulation(event) {
+  async function handleSelectedPopulation(event) {
     props.order([...props.countriesData], { population: event.target.value });
     if (event.target.value === "SelectPopulation") {
-      props.getAllCountries(limit, pageInfo);
+      await props.getAllCountries(limit, pageInfo);
+     
     }
   }
-  function handlePages(event) {
+  async function handlePages(event) {
     if (event.target.value === "SelectPage") {
-      let limit = 10;
-      props.getAllCountries(limit, limit*pageInfo);
+      props.limit(10)
+      props.search(false);
+      props.total(10);
+      props.setPage()
+      props.getAllCountries(10, limit * pageInfo);
     }
     if (event.target.value === "250") {
-      let limit = 250;
-      props.getAllCountries(limit, limit*pageInfo);
+      props.limit(250)
+      props.total(250);
+      props.setPage()
+      props.search(true);
+      props.getAllCountries(250, limit * pageInfo);
+   
     }
     if (event.target.value === "30") {
-      let limit = 30;
-      props.getAllCountries(limit, limit*pageInfo);
+      props.limit(30)
+      props.total(30);
+      props.setPage()
+      props.search(true);
+      props.getAllCountries(30, limit * pageInfo);
     }
     if (event.target.value === "50") {
-      let limit = 50;
-      props.getAllCountries(limit, pageInfo);
+      props.limit(50)
+      props.total(50);
+      props.setPage()
+      props.search(true);
+      props.getAllCountries(50, limit *pageInfo);
+      console.log("this is the searching whenclick 50 " + props.total);
     }
     if (event.target.value === "100") {
-      let limit = 100;
-      props.getAllCountries(limit, pageInfo);
+      
+      props.total(100);
+      props.limit(100)
+      props.setPage()
+      props.search(true);
+      props.getAllCountries(100, limit *pageInfo);
     }
-  };
-  
+  }
+
   return (
     <Container>
       <Div>
@@ -70,10 +98,7 @@ var pageUpdated = page +1
       </Div>
       <Div>
         <Label>Order by Population: </Label>
-        <Select
-          onChange={handleSelectedPopulation}
-         
-        >
+        <Select onChange={handleSelectedPopulation}>
           <option label="Select" value="SelectPopulation"></option>
           <option value="Ascendent" label="Ascendent"></option>
           <option value="Descendent" label="Descendent"></option>
@@ -81,7 +106,7 @@ var pageUpdated = page +1
       </Div>
       <Div>
         <Label>Order by Name: </Label>
-        <Select onChange={handleSelectedName} >
+        <Select onChange={handleSelectedName}>
           {/* <option label="Select  " value="SelectPopulation" ></option>    */}
           <option value="Ascendent">A-Z</option>
           <option value="Descendent">Z-A</option>
@@ -90,7 +115,7 @@ var pageUpdated = page +1
 
       <Div>
         <Label>Filter by Turistic Act: </Label>
-        <Select  onChange={handleSelectedSeason}>
+        <Select onChange={handleSelectedSeason}>
           <option label="Select" value="SelectSeason"></option>
           <option value="summer"> Summer</option>
           <option value="autumn"> Autumn</option>
@@ -100,12 +125,12 @@ var pageUpdated = page +1
       </Div>
       <Div>
         <Label>Display: </Label>
-        <Select  onChange={handlePages}>
+        <Select onChange={handlePages}>
           <option label="Select" value="SelectPage"></option>
-          <option value="250" > All Countries</option>
-          <option value="30" > 30 Countries</option>
-          <option value="50" >50 Countries</option>
-          <option value="100" > 100 Countries</option>
+          <option value="250"> All Countries</option>
+          <option value="30"> 30 Countries</option>
+          <option value="50">50 Countries</option>
+          <option value="100"> 100 Countries</option>
         </Select>
       </Div>
     </Container>
@@ -117,85 +142,69 @@ const mapStateToProps = (state) => {
     countries: state.countries,
     region: state.region,
     countriesData: state.countriesData,
+    searching: state.searching,
+    total: state.total,
+    limit:state.limit,
+    page:state.page
   }; // bring the redux state
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     filter: (data, option) => dispatch(filteredData(data, option)),
     order: (data, option) => dispatch(orderedData(data, option)),
+    search: (data) => dispatch(setSearching(data)),
+    total: (data) => dispatch(setTotall(data)),
+    limit: (data) => dispatch(setLimit(data)),
+    setPage: () => dispatch(setPage()),
     getAllCountries: (limit, offset) =>
       dispatch(getAllCountries(limit, offset)),
   };
 };
 
 const Div = styled.div`
-display:row;
-@media (max-width: 768px) {
+  display: row;
+  @media (max-width: 768px) {
     display: flex;
     margin-top: 5px;
   }
 `;
 
-
 const Container = styled.div`
-
-  
-  flex-direction:row;
-  border-style: solid; 
+  flex-direction: row;
+  border-style: solid;
   border-color: rgba(249, 249, 249, 0.8);
   border-width: 0.1px;
   display: flex;
   margin: 0px 10px;
 
   flex: 1;
-  
+
   padding: 10px;
   @media (max-width: 768px) {
-    flex-direction:column;
+    flex-direction: column;
     justify-content: space-between;
   }
 `;
 
-
 const Label = styled.label`
-margin-right: 10px;
-color:rgb(255, 255, 255);
+  margin-right: 10px;
+  color: rgb(255, 255, 255);
   font-size: 17px;
   font-weight: bold;
   @media (max-width: 768px) {
     font-size: 15px;
     margin-right: 10px;
   }
-`; 
+`;
 const Select = styled.select`
-margin-right: 10px;
-  background: rgb(189,200,222);
-border-radius: 7px;
-font-size: 17px;
-@media (max-width: 768px) {
+  margin-right: 10px;
+  background: rgb(189, 200, 222);
+  border-radius: 7px;
+  font-size: 17px;
+  @media (max-width: 768px) {
     font-size: 15px;
     border-radius: 7px;
   }
 `;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);

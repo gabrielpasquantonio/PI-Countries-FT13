@@ -3,21 +3,30 @@ import styled from "styled-components";
 import Pagination from "../components/Pagination";
 import React, { useState, useEffect,useContext } from "react";
 import FavoriteContext from "../context/favoritesContext";
+import { useDispatch, useSelector,connect } from "react-redux";
 
-
+import {
+  previousPage,
+  nextPage
+} from "../redux/actions";
 function Countries(props) {
-  const { loading, page, setPage, total, countries, data,favorite } = props;
+  const { loading,setPage,  countries, data,favorite } = props;
   const {favoriteCountry,updateFavoriteCountry}=useContext(FavoriteContext);
-  
-  const previousPage = () => {
-    const nextPage = Math.max(page - 1, 0);
-    setPage(nextPage);
-  };
+  const total = useSelector((state) => state.total)
+  const page = useSelector((state) => state.page);
+ 
+  console.log(page)
 
-  const nextPage = () => {
-    const nextPage = Math.min(page + 1, total - 1);
-    setPage(nextPage);
-  };
+
+  function previous() {
+    props.previousPage(page)
+  }
+  function next() {
+    props.nextPage(page,total)
+  }
+ 
+console.log(total)
+ 
 
 
   const redHeart = "❤️";
@@ -67,8 +76,8 @@ function Countries(props) {
             <Pagination
               page={page + 1}
               totalPages={total}
-              onLeftClick={previousPage}
-              onRightClick={nextPage}
+              onLeftClick={previous}
+              onRightClick={next}
               favorite={favorite}
             />
           </Container>
@@ -101,6 +110,11 @@ function Countries(props) {
     </div>
   );
 }
+
+
+
+
+
 
 const Button = styled.button`
 background-color:transparent;
@@ -228,4 +242,19 @@ const Wrap = styled.div`
    
   }
 `;
-export default Countries;
+
+
+
+const mapStateToProps = (state) => {
+  return {
+    page:state.page
+  }; // bring the redux state
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    previousPage: (page) => dispatch(previousPage(page)),
+    nextPage: (page,total) => dispatch(nextPage(page,total)),
+    
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Countries);

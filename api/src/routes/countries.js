@@ -23,7 +23,6 @@ function setCountry(props) {
 
 const getAllData = async (req, res) => {
   const result = await db.Country.findAll();
-  
 
   if (req.query.name) {
     let a = req.query.name[1].toUpperCase();
@@ -41,9 +40,14 @@ const getAllData = async (req, res) => {
     res.send(result1);
   } else {
     let limit = req.query.limit;
-    let offset = req.query.offset
-    
-    let result10 = await db.Country.findAll({ offset: offset,limit:limit});
+    let offset = req.query.offset;
+
+    let result10 = await db.Country.findAll({
+      offset: offset,
+      limit: limit,
+      include: db.Activity,
+      order: [["name", "ASC"]],
+    });
     if (result.length > 0) {
       console.log("The database already has api data");
       res.send(result10);
