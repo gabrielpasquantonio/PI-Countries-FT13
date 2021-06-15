@@ -6,6 +6,7 @@ import FavoriteContext from "../context/favoritesContext";
 import styled from 'styled-components';
 import {searchCountry} from "../utils"
 import PhoneHeader from "../components/PhoneHeader";
+import Footer from "../components/Footer";
 
 function Favorite() {
     const {favoriteCountry,updateFavoriteCountry}=useContext(FavoriteContext);
@@ -46,6 +47,7 @@ function Favorite() {
        <Countries countries={country}
        favorite={true}
        /></>}
+       <Footer/>
         </div>
     )
 }

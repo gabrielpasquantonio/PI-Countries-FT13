@@ -2,6 +2,7 @@ import Header from "../components/Header";
 import CreateForm from "../components/CreateForm";
 import styled from "styled-components";
 import PhoneHeader from "../components/PhoneHeader";
+import Footer from "../components/Footer";
 
 function Create() {
   return (
@@ -18,6 +19,7 @@ function Create() {
           </InnerLayout>
      
       </Container>
+      <Footer/>
     </div>
   );
 }

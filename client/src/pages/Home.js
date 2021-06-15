@@ -1,6 +1,6 @@
 import Header from "../components/Header";
 import PhoneHeader from "../components/PhoneHeader";
-
+import Footer from "../components/Footer";
 import Countries from "../components/Countries";
 import SearchBar from "../components/SearchBar";
 import React, { useState, useEffect } from "react";
@@ -75,7 +75,9 @@ function Home() {
         <Div className="not-found-text">
           <H1>Sorry, Country not found! </H1>
           <Img src={logo} alt="loading..." />
+         
         </Div>
+        
       ) : (
         <>
           <Filter
@@ -91,9 +93,12 @@ function Home() {
             page={page}
             
           />
+             
         </>
       )}
+      <Footer/>
     </div>
+    
   );
 }
 

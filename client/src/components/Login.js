@@ -44,6 +44,7 @@ const Container = styled.section`
   flex-direction: column;
   text-align: center;
   height: 100vh;
+  
 `;
 const Content = styled.div`
   margin-bottom: 10cw;

@@ -8,6 +8,7 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import StarRating from "./starRating";
 import "../App.css";
 import FavoriteContext from "../context/favoritesContext";
+import Footer from "./Footer"
 
 function CountryDetail() {
   const { favoriteCountry, updateFavoriteCountry } =
@@ -140,6 +141,7 @@ function CountryDetail() {
             )}
           </Bottom>
         </Card>
+        <Footer/>
       </Container>
     );
   }
