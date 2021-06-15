@@ -1,12 +1,13 @@
 import Header from "../components/Header";
 import CreateForm from "../components/CreateForm";
 import styled from "styled-components";
-
+import PhoneHeader from "../components/PhoneHeader";
 
 function Create() {
   return (
     <div>
       <Header />
+      <PhoneHeader/>
       <Container>
     
           <InnerLayout className={"contact-section"}>

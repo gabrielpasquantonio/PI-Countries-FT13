@@ -1,4 +1,6 @@
 import Header from "../components/Header";
+import PhoneHeader from "../components/PhoneHeader";
+
 import Countries from "../components/Countries";
 import SearchBar from "../components/SearchBar";
 import React, { useState, useEffect } from "react";
@@ -66,6 +68,7 @@ function Home() {
   return (
     <div>
       <Header />
+      <PhoneHeader/>
       <SearchBar onSearch={onSearch} />
 
       {notFound ? (

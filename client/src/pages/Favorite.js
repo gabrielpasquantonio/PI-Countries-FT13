@@ -5,6 +5,7 @@ import Pagination from "../components/Pagination";
 import FavoriteContext from "../context/favoritesContext";
 import styled from 'styled-components';
 import {searchCountry} from "../utils"
+import PhoneHeader from "../components/PhoneHeader";
 
 function Favorite() {
     const {favoriteCountry,updateFavoriteCountry}=useContext(FavoriteContext);
@@ -40,7 +41,8 @@ function Favorite() {
 
     return (
         <div>
-        <Header/>  {favoriteCountry >= 0  ? <Div ><H1>You don't have any ❤️ Country...</H1></Div>:<>
+        <Header/>
+        <PhoneHeader/>  {favoriteCountry >= 0  ? <Div ><H1>You don't have any ❤️ Country...</H1></Div>:<>
        <Countries countries={country}
        favorite={true}
        /></>}

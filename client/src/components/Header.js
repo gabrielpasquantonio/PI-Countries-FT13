@@ -13,7 +13,7 @@ function Header() {
 
 
   return (
-  
+   
     <Nav>
       <NavLink exact to="/">
         <Logo>
@@ -49,8 +49,9 @@ function Header() {
 
 
     </Nav>
+
+
  
-  
 
  
   );
@@ -164,6 +165,7 @@ const NavMenu = styled.div`
     }
   }
 `;
+
 
 const DropDown = styled.div`
   position: absolute;
