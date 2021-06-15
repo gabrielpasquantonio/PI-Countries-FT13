@@ -1,28 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./CreateForm.css";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form} from "formik";
 import TextField from "./TextField.js";
 import * as Yup from "yup";
 import PrimaryButton from "./PrimaryButton";
 import styled from "styled-components";
 import SelectField from "./SelectField";
 import CheckBoxField from "./CheckBoxField";
-import {createActivity} from "../redux/actions"
-import { useDispatch,connect } from "react-redux";
-
-
+import { createActivity } from "../redux/actions";
+import { useDispatch, connect } from "react-redux";
 
 function CreateForm() {
   const dispatch = useDispatch();
-  const initialValues= {name: "",
-    difficulty:"",
+  const initialValues = {
+    name: "",
+    difficulty: "",
     duration: "",
     season: "",
     country: "",
-    id: ""
-}
+    id: "",
+  };
 
-  
   const validate = Yup.object({
     name: Yup.string()
       .max(20, "Must be 20 characters or less")
@@ -35,26 +33,27 @@ function CreateForm() {
       .min(1, "Must  have a minimun value of 1")
       .max(24, "Must have a maximun value of 24")
       .required("Required"),
-    season: Yup.string()
-      .required("Required"),
-    country: Yup.lazy(val => (Array.isArray(val) ? Yup.array().of(Yup.string().required("Please select at least one Country"),) : Yup.string().required("Please select at least one Country")))
-   
-    
+    season: Yup.string().required("Required"),
+    country: Yup.lazy((val) =>
+      Array.isArray(val)
+        ? Yup.array().of(
+            Yup.string().required("Please select at least one Country")
+          )
+        : Yup.string().required("Please select at least one Country")
+    ),
   });
 
-
-
-  
-
-
   return (
-    <Formik initialValues={initialValues} validationSchema={validate} dispatch={dispatch}
-    onSubmit={async (values,{ resetForm }) => {
-      
-      await new Promise((r) => setTimeout(r, 500));
-      await dispatch(createActivity(values))
-      resetForm()
-    }} >
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validate}
+      dispatch={dispatch}
+      onSubmit={async (values, { resetForm }) => {
+        await new Promise((r) => setTimeout(r, 500));
+        await dispatch(createActivity(values));
+        resetForm();
+      }}
+    >
       {(formik) => (
         <div>
           <div
@@ -63,8 +62,8 @@ function CreateForm() {
           >
             <H2>Create New Activity</H2>
           </div>
-          <Form className="Form"  >
-          <Diiv className="form-field" name="id"   />
+          <Form className="Form">
+            <Diiv className="form-field" name="id" />
             <div className="form-field">
               <TextField
                 label="Activity Name*"
@@ -90,7 +89,6 @@ function CreateForm() {
               />
             </div>
             <div className="form-field">
-             
               <CheckBoxField
                 label="Please Select the Season"
                 name="season"
@@ -105,9 +103,8 @@ function CreateForm() {
                 name="country"
                 className="input"
               ></SelectField>
-              
             </div>
-            <pre>{JSON.stringify(formik, null, 4)}</pre>
+            {/*<pre>{JSON.stringify(formik, null, 4)}</pre>*/}
             <div className="but">
               <div className="form-field f-button">
                 <PrimaryButton title="create" type="submit" formik={formik} />
@@ -126,10 +123,8 @@ function CreateForm() {
   );
 }
 
-
-
 const Diiv = styled.div`
-display: none;
+  display: none;
 `;
 const ResetButton = styled.button`
   background-color: var(--primary-color);
@@ -156,7 +151,7 @@ const ResetButton = styled.button`
     background-color: var(--white-color);
   }
 
-   @media (max-width: 508px) {
+  @media (max-width: 508px) {
     padding: 0.4rem 1.5rem;
     font-size: small;
   }
@@ -171,4 +166,4 @@ const H2 = styled.h2`
   }
 `;
 
-export default connect(null,{createActivity}) (CreateForm);
+export default connect(null, { createActivity })(CreateForm);

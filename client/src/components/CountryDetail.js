@@ -8,7 +8,7 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import StarRating from "./starRating";
 import "../App.css";
 import FavoriteContext from "../context/favoritesContext";
-import Footer from "./Footer"
+import Footer from "./Footer";
 
 function CountryDetail() {
   const { favoriteCountry, updateFavoriteCountry } =
@@ -26,8 +26,6 @@ function CountryDetail() {
 
   const redHeart = "❤️";
   const blackHeart = "🖤";
-
-  //const heart =  favoriteCountry.includes(countryDetail.id) ? redHeart : blackHeart
 
   const clickHeart = (e) => {
     e.preventDefault();
@@ -124,24 +122,28 @@ function CountryDetail() {
                     </Difficulty>
                     <Difficulty>
                       <H3>Duration:</H3>
-                      <H3> {stat.duration}{stat.duration === 1? ' Hour':' Hours'}</H3>
+                      <H3>
+                        {" "}
+                        {stat.duration}
+                        {stat.duration === 1 ? " Hour" : " Hours"}
+                      </H3>
                     </Difficulty>
                   </BottomCard>
                 );
               })
             ) : (
               <Alert className="alert">
-              <NavLink exact to="/create">
-                <H1Alert>
-                  {countryDetail.name} still doesn't has any Touristic Activity
-                  created, fell free to add one by clicking here
-                </H1Alert>
-              </NavLink>
+                <NavLink exact to="/create">
+                  <H1Alert>
+                    {countryDetail.name} still doesn't has any Touristic
+                    Activity created, fell free to add one by clicking here
+                  </H1Alert>
+                </NavLink>
               </Alert>
             )}
           </Bottom>
         </Card>
-        <Footer/>
+        <Footer />
       </Container>
     );
   }
@@ -151,7 +153,7 @@ const H1Alert = styled.h1`
   margin-bottom: 0;
   margin-top: 0;
   font-size: 20px;
-  color:#10121A;
+  color: #10121a;
   margin-left: 5px;
   display: relative;
   align-items: center;
@@ -168,20 +170,17 @@ const H1Alert = styled.h1`
     font-size: 20px;
     margin-left: 3px;
   }
-
 `;
 
 const Alert = styled.div`
-display: flex;
+  display: flex;
 
-align-items: center;
-justify-content: center;
-color:#10121A;
-height: 200px;
-background-size: 100% 200px;
-
+  align-items: center;
+  justify-content: center;
+  color: #10121a;
+  height: 200px;
+  background-size: 100% 200px;
 `;
-
 
 const Div = styled.div`
   margin-top: 100px;
@@ -196,24 +195,22 @@ const Card = styled.div`
   transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
   border: 3px solid rgba(249, 249, 249, 0.1);
   @media (min-width: 890px) and (max-width: 1100px) {
-   width: 80%;
-   margin-left: 10%;
+    width: 80%;
+    margin-left: 10%;
   }
   @media (min-width: 1101px) and (max-width: 1450px) {
-   width: 60%;
-   margin-left: 20%;
+    width: 60%;
+    margin-left: 20%;
   }
   @media (min-width: 1451px) and (max-width: 2050px) {
-   width: 30%;
-   margin-left: 20%;
+    width: 30%;
+    margin-left: 20%;
   }
   @media (min-width: 2051px) and (max-width: 4050px) {
-   width: 40%;
-   margin-left: 25%;
+    width: 40%;
+    margin-left: 25%;
   }
 `;
-
-
 
 const Wrap = styled.div`
   padding-top: 56.25%;
@@ -237,8 +234,6 @@ const Wrap = styled.div`
     z-index: 1;
     top: 0;
   }
-
-  
 `;
 const Container = styled.div`
   position: relative;
@@ -247,8 +242,6 @@ const Container = styled.div`
   display: block;
   top: 100px;
   padding: 0 calc(3.5vw + 5px);
-  
-
 `;
 
 //first section
@@ -356,7 +349,7 @@ const Difficulty = styled.div`
   padding-left: 1%;
   @media (max-width: 868px) {
     padding-right: 1%;
-  padding-left: 1%;
+    padding-left: 1%;
   }
 `;
 const H3 = styled.h1`
@@ -377,7 +370,6 @@ const H3 = styled.h1`
     font-size: 20px;
     margin-left: 3px;
   }
- 
 `;
 const B1 = styled.div`
   padding-top: 10px;
@@ -386,7 +378,7 @@ const B1 = styled.div`
   align-items: center;
   color: black;
   background-color: white;
-  
+
   padding-top: 2%;
 `;
 const H2 = styled.h2`

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import {
@@ -9,19 +9,16 @@ import {
   setSearching,
   setTotall,
   setLimit,
-  setPage
+  setPage,
 } from "../redux/actions";
 
 function Filter(props) {
-  const {pageInfo, page } = props;
+  const { pageInfo, page } = props;
   const total = useSelector((state) => state.total);
   const limit = useSelector((state) => state.limit);
 
-
-
-  
   function handleSelectedRegion(event) {
-    props.filter([...props.countriesData], { region: event.target.value }); // filter de Redux
+    props.filter([...props.countriesData], { region: event.target.value });
     if (event.target.value === "SelectContinent") {
       props.getAllCountries(limit, pageInfo);
     }
@@ -40,47 +37,43 @@ function Filter(props) {
     props.order([...props.countriesData], { population: event.target.value });
     if (event.target.value === "SelectPopulation") {
       await props.getAllCountries(limit, pageInfo);
-     
     }
   }
   async function handlePages(event) {
     if (event.target.value === "SelectPage") {
-      props.limit(10)
+      props.limit(10);
       props.search(false);
       props.total(10);
-      props.setPage()
+      props.setPage();
       props.getAllCountries(10, limit * pageInfo);
     }
     if (event.target.value === "250") {
-      props.limit(250)
+      props.limit(250);
       props.total(250);
-      props.setPage()
+      props.setPage();
       props.search(true);
       props.getAllCountries(250, limit * pageInfo);
-   
     }
     if (event.target.value === "30") {
-      props.limit(30)
+      props.limit(30);
       props.total(30);
-      props.setPage()
+      props.setPage();
       props.search(true);
       props.getAllCountries(30, limit * pageInfo);
     }
     if (event.target.value === "50") {
-      props.limit(50)
+      props.limit(50);
       props.total(50);
-      props.setPage()
+      props.setPage();
       props.search(true);
-      props.getAllCountries(50, limit *pageInfo);
-      console.log("this is the searching whenclick 50 " + props.total);
+      props.getAllCountries(50, limit * pageInfo);
     }
     if (event.target.value === "100") {
-      
       props.total(100);
-      props.limit(100)
-      props.setPage()
+      props.limit(100);
+      props.setPage();
       props.search(true);
-      props.getAllCountries(100, limit *pageInfo);
+      props.getAllCountries(100, limit * pageInfo);
     }
   }
 
@@ -107,7 +100,6 @@ function Filter(props) {
       <Div>
         <Label>Order by Name: </Label>
         <Select onChange={handleSelectedName}>
-          {/* <option label="Select  " value="SelectPopulation" ></option>    */}
           <option value="Ascendent">A-Z</option>
           <option value="Descendent">Z-A</option>
         </Select>
@@ -144,8 +136,8 @@ const mapStateToProps = (state) => {
     countriesData: state.countriesData,
     searching: state.searching,
     total: state.total,
-    limit:state.limit,
-    page:state.page
+    limit: state.limit,
+    page: state.page,
   }; // bring the redux state
 };
 const mapDispatchToProps = (dispatch) => {

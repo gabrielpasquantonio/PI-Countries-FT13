@@ -8,18 +8,15 @@ function Create() {
   return (
     <div>
       <Header />
-      <PhoneHeader/>
+      <PhoneHeader />
       <Container>
-    
-          <InnerLayout className={"contact-section"}>
-            <div className="left-content">
-              <CreateForm />
-            </div>
-           
-          </InnerLayout>
-     
+        <InnerLayout className={"contact-section"}>
+          <div className="left-content">
+            <CreateForm />
+          </div>
+        </InnerLayout>
       </Container>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
@@ -56,7 +53,7 @@ const Image = styled.img`
   display: block;
   max-width: 100%;
   width: 100%;
- 
+
   height: auto;
 `;
 const Title = styled.div`
@@ -65,14 +62,11 @@ const Title = styled.div`
 `;
 
 const Div = styled.div`
-
-height: 100%;
-
+  height: 100%;
 `;
 
 const InnerLayout = styled.div`
-    padding: 5rem 0;
+  padding: 5rem 0;
 `;
-
 
 export default Create;

@@ -138,11 +138,7 @@ const NavMenu = styled.div`
       }
     }
   }
-  .hidden {
-    @media (max-width: 768px) {
-      display: none;
-    }
-  }
+ 
   .favorite {
     @media (max-width: 768px) {
       justify-content: space-between;

@@ -7,8 +7,9 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import logo from "../assets/colombo.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCountries, setSearching,setTotall } from "../redux/actions";
+import { getAllCountries, setSearching, setTotall } from "../redux/actions";
 import Filter from "../components/Filter";
+
 const searchCountrry = async (country) => {
   try {
     let url = `http://localhost:3001/countries?name=%22${country}%22`;
@@ -19,11 +20,10 @@ const searchCountrry = async (country) => {
 };
 
 function Home() {
+  const dispatch = useDispatch();
   const [notFound, setNotFound] = useState(false);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
-
-  const dispatch = useDispatch();
   const countries = useSelector((state) => state.countries);
   const searching = useSelector((state) => state.searching);
   const limit = useSelector((state) => state.limit);
@@ -33,9 +33,7 @@ function Home() {
   var pageInfo = limit * page;
 
   useEffect(() => {
-    
-      dispatch(getAllCountries(limit, limit * page));
-    
+    dispatch(getAllCountries(limit, limit * page));
   }, [page]);
 
   useEffect(() => {
@@ -64,20 +62,18 @@ function Home() {
     }
     setLoading(false);
   };
-  
+
   return (
     <div>
       <Header />
-      <PhoneHeader/>
+      <PhoneHeader />
       <SearchBar onSearch={onSearch} />
 
       {notFound ? (
         <Div className="not-found-text">
           <H1>Sorry, Country not found! </H1>
           <Img src={logo} alt="loading..." />
-         
         </Div>
-        
       ) : (
         <>
           <Filter
@@ -91,14 +87,11 @@ function Home() {
             countries={countries}
             loading={loading}
             page={page}
-            
           />
-             
         </>
       )}
-      <Footer/>
+      <Footer />
     </div>
-    
   );
 }
 
