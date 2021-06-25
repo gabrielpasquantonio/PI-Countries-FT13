@@ -56,9 +56,7 @@ const getAllData = async (req, res) => {
         .get("https://restcountries.eu/rest/v2/all")
         .then((response) => response.data.map((item) => setCountry(item)))
         .catch((error) => res.status(500).json({ error: "Error" }));
-      //usar os datos que quiero
-      //passara base de datos con BulkCreate
-
+      
       await db.Country.bulkCreate(countryData);
     }
   }

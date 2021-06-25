@@ -5,16 +5,7 @@ const db = require("../db.js");
 const activity = Router();
 
 
-function processActivity(props) {
-    return {
-      id: props.id,
-      name: props.name,
-      duration: props.duration,
-      season: props.season,
-      difficulty: props.difficulty,
-      country:props.country,
-    };
-  }
+
 
 const createActivity = async (req, res) => {
 
@@ -40,21 +31,21 @@ const createActivity = async (req, res) => {
           
           .then(async (activitySave) => {
               
-            await activitySave.addCountry(country); // el metodo addcountry viene de la relacion en DB
-            // Seq agrega los metodos de addcountry y addactivity por defect ( por las relacion en db)
-            // add de countries es una promesa // aca agrego el country
-            return activitySave // aca le agrego el pais a la actividad creada
+            await activitySave.addCountry(country); // comes from db relation
+            // Seq add the things from country and activity by default, as we state it belongs to each other
+         
+            return activitySave 
           })
           .then(async (activitySave) => {
             const result = await db.Activity.findOne({
-              // uso un method de seq para hallar un elemento
-              where: { id: activitySave.id }, // tengo que comentar esto.
-              include: [db.Country], // incluyo el country que tiene la actividad. // aca busco el country
+              
+              where: { id: activitySave.id }, 
+              include: [db.Country], 
             });
             return result;
           })
           .then((activitySave) => res.send(activitySave)) // respuesta OK
-          .catch((error) => res.send(error)); // valido si hay error al crear
+          .catch((error) => res.send(error)); 
          
       }
 
